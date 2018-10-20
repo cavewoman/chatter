@@ -3,6 +3,7 @@ defmodule ChatterWeb.UserSocket do
 
   ## Channels
   # channel "room:*", ChatterWeb.RoomChannel
+  channel "chat_room:lobby", ChatterWeb.ChatRoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
