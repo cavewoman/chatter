@@ -11,13 +11,16 @@ defmodule ChatterWeb.ChatRoomChannel do
   end
 
   def handle_info(:after_join, socket) do
-    IO.puts "<><><>CALLING HANDLE INFO<><><><>"
     Chatter.Message.recent_messages()
-    |> Enum.each(fn msg -> push(socket, "new_message", %{
+    |> Enum.each(fn msg -> push(socket, "new_message", format_msg(msg)) end)
+    {:noreply, socket}
+  end
+
+  defp format_msg(msg) do
+    %{
       name: msg.name,
       message: msg.message
-    }) end)
-    {:noreply, socket}
+    }
   end
 
   # Channels can be used in a request/response fashion
